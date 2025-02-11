@@ -1,0 +1,83 @@
+/* reset.css */
+
+/* Box sizing */
+* {
+  box-sizing: border-box;
+}
+
+/* Remove default margin and padding */
+body,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+ul,
+ol,
+li,
+figure,
+figcaption,
+blockquote,
+dl,
+dd {
+  margin: 0;
+  padding: 0;
+}
+
+/* Remove list styles */
+ul,
+ol {
+  list-style: none;
+}
+
+/* Remove default hyperlink styles */
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+/* Remove table border spacing */
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+/* Remove outline on focus */
+button,
+input,
+textarea,
+select,
+a:focus {
+  outline: none;
+}
+
+button {
+  font-family: inherit;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  background: none;
+}
+
+/* Additional CSS reset rules can be added here */
+/* width */
+/* ::-webkit-scrollbar {
+      width: 10px;
+  } */
+
+/* Track */
+/* ::-webkit-scrollbar-track {
+      background: #00004c;
+  } */
+
+/* Handle */
+/* ::-webkit-scrollbar-thumb {
+      background: #00004c;
+  } */
+
+/* Handle on hover */
+/* ::-webkit-scrollbar-thumb:hover {
+      background: #0000ac;
+  } */

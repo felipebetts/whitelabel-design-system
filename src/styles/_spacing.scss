@@ -1,0 +1,25 @@
+@use 'utils';
+
+:root {
+  /* spacing values */
+  --space-unit: 16px;
+  --space-xxxs: calc(0.25 * var(--space-unit)); // 4px | (md) 5px
+  --space-xxs: calc(0.375 * var(--space-unit)); // 6px | (md) 7.5px
+  --space-xs: calc(0.5 * var(--space-unit)); // 8px | (md) 10px
+  --space-sm: calc(0.75 * var(--space-unit)); // 12px | (md) 15px
+  --space-md: calc(1.25 * var(--space-unit)); // 20px | (md) 25px
+  --space-lg: calc(2 * var(--space-unit)); // 32px | (md) 40px
+  --space-xl: calc(3.25 * var(--space-unit)); // 52px | (md) 65px
+  --space-xxl: calc(5.25 * var(--space-unit)); // 84px | (md) 105px
+  --space-xxxl: calc(8.5 * var(--space-unit)); // 136px | (md) 170px
+
+  --component-padding: var(--space-sm);
+  --content-max-w: 1168px;
+}
+
+@include utils.breakpoint(md) {
+  :root {
+    --space-unit: 20px;
+    --component-padding: var(--space-md);
+  }
+}

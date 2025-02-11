@@ -1,0 +1,52 @@
+$breakpoint-fallback: 768px;
+
+@mixin breakpoint($breakpoint) {
+  $breakpoints: (
+    xxs: 320px,
+    xs: 375px,
+    sm: 425px,
+    md: 768px,
+    lg: 896px,
+    xl: 1024px,
+    xxl: 1440px,
+  );
+
+  $chosenBreakpoint: map-get($breakpoints, $breakpoint);
+
+  @if not $chosenBreakpoint {
+    @warn "Invalid breakpoint: #{$breakpoint}. Using default value: var(--breakpoint-md).";
+    $chosenBreakpoint: $breakpoint-fallback;
+  }
+
+  @media (min-width: $chosenBreakpoint) {
+    @content;
+  }
+}
+
+@mixin fontSmooth {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+@mixin truncate($lines) {
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: $lines;
+  -webkit-box-orient: vertical;
+  white-space: normal;
+}
+
+/* add this class to parent element that contains icon + text */
+.icon_text_aligner {
+  display: flex;
+  align-items: center;
+
+  > *:nth-child(2) {
+    margin-left: var(--space-xxs);
+  }
+
+  .icon {
+    color: inherit;
+    flex-shrink: 0;
+  }
+}

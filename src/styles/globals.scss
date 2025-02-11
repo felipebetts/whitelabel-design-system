@@ -1,0 +1,31 @@
+@use "reset";
+@use "vars";
+@use "colors";
+@use "typography";
+@use "spacing";
+@use "grids";
+@use "utils";
+
+body {
+  background: var(--color-background);
+  color: var(--color-text);
+  overflow-x: hidden;
+}
+
+a {
+  transition: var(--duration);
+}
+
+.missing {
+  display: none;
+}
+
+@include utils.breakpoint(md) {
+  a {
+    &:hover,
+    &:visited:hover {
+      color: var(--color-tertiary);
+      fill: var(--color-tertiary);
+    }
+  }
+}

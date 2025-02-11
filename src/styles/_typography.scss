@@ -1,0 +1,177 @@
+@use 'utils';
+@use 'colors';
+
+:root {
+  // font-family vars are declared in RootLayout using next/font
+
+  /* base values */
+  --text-base-size: 0.85em;
+  --text-scale-ratio: 1.15;
+
+  /* text scale */
+
+  --text-xs: calc(
+    var(--text-base-size) / (var(--text-scale-ratio) * var(--text-scale-ratio))
+  );
+  --text-sm: calc(var(--text-base-size) / var(--text-scale-ratio));
+  --text-md: calc(var(--text-base-size) * var(--text-scale-ratio));
+  --text-lg: calc(
+    var(--text-base-size) * var(--text-scale-ratio) * var(--text-scale-ratio)
+  );
+  --text-xl: calc(
+    var(--text-base-size) * var(--text-scale-ratio) * var(--text-scale-ratio) *
+      var(--text-scale-ratio)
+  );
+  --text-xxl: calc(
+    var(--text-base-size) * var(--text-scale-ratio) * var(--text-scale-ratio) *
+      var(--text-scale-ratio) * var(--text-scale-ratio)
+  );
+  --text-xxxl: calc(
+    var(--text-base-size) * var(--text-scale-ratio) * var(--text-scale-ratio) *
+      var(--text-scale-ratio) * var(--text-scale-ratio) *
+      var(--text-scale-ratio)
+  );
+
+  /* line-height */
+  --heading-line-height: 1.2;
+  --body-line-height: 1.4;
+}
+
+@include utils.breakpoint(xs) {
+  :root {
+    --text-base-size: 0.95em;
+    --text-scale-ratio: 1.2;
+  }
+}
+
+@include utils.breakpoint(md) {
+  :root {
+    --text-base-size: 1.05em;
+    --text-scale-ratio: 1.225;
+  }
+}
+
+@include utils.breakpoint(xl) {
+  :root {
+    --text-base-size: 1.15em;
+    --text-scale-ratio: 1.25;
+  }
+}
+
+body {
+  font-size: var(--text-base-size);
+  color: var(--color-text);
+}
+
+h1,
+h2,
+h3,
+h4,
+form legend {
+  color: var(--color-text-heading);
+  margin-bottom: var(--space-xxs);
+  line-height: var(--heading-line-height);
+  font-weight: normal;
+}
+
+/* text size */
+.text--xxxl {
+  font-size: var(--text-xxxl);
+}
+
+h1,
+.text--xxl {
+  font-size: var(--text-xxl);
+}
+
+h2,
+.text--xl {
+  font-size: var(--text-xl);
+}
+
+h3,
+.text--lg {
+  font-size: var(--text-lg);
+}
+
+h4,
+.text--md {
+  font-size: var(--text-md);
+}
+
+h5,
+.text--sm,
+small {
+  font-size: var(--text-sm);
+}
+
+.text--xs {
+  font-size: var(--text-xs);
+}
+
+p {
+  line-height: var(--body-line-height);
+  font-family: var(--font-secondary);
+}
+
+a {
+  color: var(--color-link);
+
+  // &:visited {
+  //   color: var(--color-link-visited);
+  // }
+}
+
+b,
+strong {
+  font-weight: bold;
+}
+
+.text-container {
+  h2,
+  h3,
+  h4 {
+    margin-top: var(--space-sm);
+  }
+
+  ul,
+  ol,
+  p {
+    margin-bottom: var(--space-md);
+  }
+
+  ul,
+  ol {
+    list-style-position: outside;
+    padding-left: 24px;
+  }
+
+  ul {
+    list-style-type: disc;
+  }
+
+  ol {
+    list-style-type: decimal;
+  }
+
+  ul li,
+  ol li {
+    line-height: var(--body-line-height);
+  }
+
+  em {
+    font-style: italic;
+  }
+
+  u {
+    text-decoration: underline;
+  }
+}
+
+/* utility classes */
+.truncate {
+  // truncate text if it exceeds parent
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
