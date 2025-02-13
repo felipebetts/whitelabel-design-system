@@ -16,8 +16,14 @@ jobs:
       - run: npm run build
       - name: Preparar pasta do artifact
         run: |
-          mkdir -p build
-          cp -R dist build/  # agora a pasta "dist" estará dentro de "build"
+          # Verifica se a pasta dist existe
+          if [ -d "dist" ]; then
+            mkdir -p build
+            cp -R dist build/  # Copia a pasta "dist" para dentro de "build"
+          else
+            echo "A pasta 'dist' não foi gerada pelo build."
+            exit 1
+          fi
       - name: Upload da pasta build
         uses: actions/upload-artifact@v4
         with:
@@ -42,13 +48,17 @@ jobs:
         with:
           name: build-folder
           path: .
-      - name: Verificar estrutura
+      - name: Listar estrutura para debug
         run: ls -R
-      # Se desejar, mova a pasta "dist" para a raiz:
       - name: Preparar pasta dist para publicação
         run: |
-          rm -rf dist
-          mv build/dist .
+          if [ -d "build/dist" ]; then
+            rm -rf dist
+            mv build/dist .
+          else
+            echo "build/dist não foi encontrado. Verifique a estrutura acima."
+            exit 1
+          fi
       - run: npm ci
       - run: npm publish
         env:
