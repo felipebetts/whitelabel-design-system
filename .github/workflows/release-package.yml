@@ -14,11 +14,15 @@ jobs:
           node-version: 20
       - run: npm ci
       - run: npm run build
-      - name: Upload dist folder
+      - name: Preparar pasta do artifact
+        run: |
+          mkdir -p build
+          cp -R dist build/  # agora a pasta "dist" estará dentro de "build"
+      - name: Upload da pasta build
         uses: actions/upload-artifact@v4
         with:
-          name: dist-folder
-          path: dist
+          name: build-folder
+          path: build
 
   publish-gpr:
     needs: build
@@ -33,11 +37,18 @@ jobs:
           node-version: 20
           registry-url: https://npm.pkg.github.com/
           token: ${{ secrets.GITHUB_TOKEN }}
-      - name: Download dist folder
+      - name: Download da pasta build
         uses: actions/download-artifact@v4
         with:
-          name: dist-folder
+          name: build-folder
           path: .
+      - name: Verificar estrutura
+        run: ls -R
+      # Se desejar, mova a pasta "dist" para a raiz:
+      - name: Preparar pasta dist para publicação
+        run: |
+          rm -rf dist
+          mv build/dist .
       - run: npm ci
       - run: npm publish
         env:
