@@ -14,21 +14,11 @@ jobs:
           node-version: 20
       - run: npm ci
       - run: npm run build
-      - name: Preparar pasta do artifact
-        run: |
-          # Verifica se a pasta dist existe
-          if [ -d "dist" ]; then
-            mkdir -p build
-            cp -R dist build/  # Copia a pasta "dist" para dentro de "build"
-          else
-            echo "A pasta 'dist' não foi gerada pelo build."
-            exit 1
-          fi
-      - name: Upload da pasta build
+      - name: Upload dist folder
         uses: actions/upload-artifact@v4
         with:
-          name: build-folder
-          path: build
+          name: dist-folder
+          path: dist
 
   publish-gpr:
     needs: build
@@ -43,22 +33,15 @@ jobs:
           node-version: 20
           registry-url: https://npm.pkg.github.com/
           token: ${{ secrets.GITHUB_TOKEN }}
-      - name: Download da pasta build
+      - name: Criar pasta para artifact
+        run: mkdir -p dist
+      - name: Download artifact into 'dist' folder
         uses: actions/download-artifact@v4
         with:
-          name: build-folder
-          path: .
-      - name: Listar estrutura para debug
-        run: ls -R
-      - name: Preparar pasta dist para publicação
-        run: |
-          if [ -d "build/dist" ]; then
-            rm -rf dist
-            mv build/dist .
-          else
-            echo "build/dist não foi encontrado. Verifique a estrutura acima."
-            exit 1
-          fi
+          name: dist-folder
+          path: dist
+      - name: Listar estrutura para verificação
+        run: ls -R dist
       - run: npm ci
       - run: npm publish
         env:
